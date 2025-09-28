@@ -3,7 +3,7 @@ import { Field } from './field'
 export default class MatchThree {
   constructor(rows, cols, colors) {
     this.field = new Field(rows, cols, colors)
-    console.log(this.field)
+    this.score = 0
   }
 
   swap(x1, y1, x2, y2) {
@@ -31,6 +31,8 @@ export default class MatchThree {
     let matches
     do {
       matches = this.findMatches()
+      this.score += matches.length
+
       if (matches.length > 0) {
         this.removeMatches(matches)
         await new Promise(resolve => setTimeout(resolve, 500))
@@ -83,7 +85,7 @@ export default class MatchThree {
         }
       }
     }
-  
+
     return matches
   }
 

@@ -58,6 +58,8 @@ function onDragEnd(x, y, event) {
   <section class="match-three h-100">
     <div class="container">
       <section class="field col w-100">
+        <div class="_my-4">SCORE: {{ game.score }}</div>
+
         <div
           v-for="(row, y) in game.field.matrix"
           :key="y"
