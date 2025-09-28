@@ -1,0 +1,19 @@
+$sizes: (0, 12, 14, 16, 18, 20, 22, 24, 28, 32, 36, 40, );
+$line-sizes: (0, 16, 20, 22, 24, 28, 32, 36, 40, 44, 48);
+$weights: (400, 500, 700);
+
+@each $size in $sizes {
+  ._fs-#{$size} {
+    font-size: #{$size}px !important;
+  }
+}
+@each $lsize in $line-sizes {
+  ._lh-#{$lsize} {
+    line-height: #{$lsize}px !important;
+  }
+}
+@each $weight in $weights {
+  ._fw-#{$weight} {
+    font-weight: #{$weight} !important;
+  }
+}
