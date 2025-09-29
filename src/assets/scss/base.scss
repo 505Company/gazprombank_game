@@ -2,6 +2,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 24px;
+  overflow: hidden;
 }
 
 .app {
@@ -36,14 +37,14 @@ body {
   flex-direction: column;
 }
 
-.gap-1 {
-  gap: 4px;
-}
-
 .justify-between {
   justify-content: space-between;
 }
 
 .justify-center {
   justify-content: center;
+}
+
+.align-center {
+  align-items: center;
 }
