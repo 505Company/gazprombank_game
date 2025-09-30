@@ -21,7 +21,7 @@ const routes = [
     path: '/match-three',
     name: 'MatchThree',
     meta: {
-      layout: 'default'
+      layout: 'empty'
     },
     component: () => import('@/pages/MatchThreePage.vue')
   },
