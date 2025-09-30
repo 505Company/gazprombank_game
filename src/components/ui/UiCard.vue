@@ -12,12 +12,12 @@ const isDark = true
 
 <style lang="scss" scoped>
 .card {
-  border: solid 2px white;
-  border-radius: 12px;
+  border-radius: 16px;
   background-color: white;
 
   &_dark {
-    background-color: rgb(68, 90, 191);
+    box-shadow: inset 2px 1px 4px 0px rgba(0, 56, 231, 1),inset -4px -3px 3px 0px rgba(5, 41, 154, 1),inset 6px 3px 3px 0px rgba(138, 189, 255, 0.8),0px 6px 22px 8px rgba(0, 25, 150, 0.4);
+    background: linear-gradient(167.59deg, rgba(30, 100, 254, 1),rgba(14, 71, 222, 1) 100%);
 
     & .card__content {
       color: white;

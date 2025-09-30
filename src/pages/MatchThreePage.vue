@@ -21,10 +21,15 @@ const dragStart = ref(null)
 
 function onDragStart(x, y, event) {
   dragStart.value = { x, y, clientX: event.clientX, clientY: event.clientY }
+  const tile = event.target.closest('.tile')
+  tile.classList.add('js-tile_active')
 }
 
 function onDragEnd(x, y, event) {
   if (!dragStart.value) return
+
+  const activeList = document.querySelectorAll('.js-tile_active')
+  activeList.forEach(el => el.classList.remove('js-tile_active'))
 
   const dx = event.clientX - dragStart.value.clientX
   const dy = event.clientY - dragStart.value.clientY
@@ -77,13 +82,12 @@ function onDragEnd(x, y, event) {
             <div
               class="tile__dot d-flex w-100 h-100"
               :style="`background-image: ${colorsValue[value]}`"
-              @mousedown="onDragStart(x, y, $event)"
-              @mouseup="onDragEnd(x, y, $event)"
               @touchstart="onDragStart(x, y, $event.touches[0])"
               @touchend="onDragEnd(x, y, $event.changedTouches[0])"
             >
               <img
-                :src="`/src/assets/img/match-3/${colorsValue[value]}.png`"
+                v-if="!!colorsValue[value]"
+                :src="`/src/assets/img/match-3/${colorsValue[value]}.webp`"
                 class="tile__img w-100 h-100"
               >
               <!-- {{ value }} -->
@@ -109,13 +113,14 @@ function onDragEnd(x, y, event) {
 <style lang="scss" scoped>
 .match-three {
   display: grid;
-  background-image: url('@/assets/img/match-3/match_bg.png');
+  background-image: url('@/assets/img/match-3/match_bg.webp');
   background-size: cover;
 }
 
 .field {
   border-radius: 16px;
   background: rgba(159, 166, 203, 1);
+  transition: all .3s ease;
 }
 
 .tile {
@@ -124,17 +129,23 @@ function onDragEnd(x, y, event) {
   user-select: none;
   border-radius: 16px;
   background: rgba(194, 202, 242, 1);
+  transition: all .3s ease;
 
 
   &__dot {
     border-radius: 50%;
-    transition: all 1s ease;
+    transition: all .3s ease;
   }
 }
 
 .icon {
   width: 32px;
   height: 32px;
+  transition: all .3s ease;
+}
+
+.js-tile_active {
+  background-color: rgba(110, 163, 254, 0.8);
 }
 
 @keyframes show-in {
