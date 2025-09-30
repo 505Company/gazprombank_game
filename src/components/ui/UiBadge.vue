@@ -1,18 +1,14 @@
 <script setup></script>
 
 <template>
-  <div class="badge d-flex justify-center _pa-1">
+  <div class="badge d-flex justify-center _pa-1 _fs-20">
     <slot />
   </div>
 </template>
 
 <style lang="scss" scoped>
 .badge {
-  background: rgba(255, 255, 255, 1);
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 100%;
-  border: solid 4px #445ABF;
-  border-radius: 17px;
+  background: white;
+  border-radius: 8px;
 }
 </style>

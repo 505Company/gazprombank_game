@@ -20,7 +20,7 @@ const goTo = (page) => {
     >
 
       <image
-        xlink:href="@/assets/img/map_bg.png"
+        xlink:href="@/assets/img/map_bg.jpg"
         class="map-bg__img"
         width="100%"
         height="100%"
@@ -57,6 +57,24 @@ const goTo = (page) => {
           fill="#FFFFFF"
           r="23"
           @click="goTo('Home')"
+        />
+      </g>
+
+      <g class="bubble__home">
+        <image
+          xlink:href="@/assets/img/bubble.webp"
+          width="12"
+          height="12"
+          x="58%"
+          y="10%"
+        />
+
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0 0; 0 -0.5; 0 0; 0 0.5; 0 0"
+          dur="3s"
+          repeatCount="indefinite"
         />
       </g>
     </svg>
