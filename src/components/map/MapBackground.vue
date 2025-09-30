@@ -20,7 +20,7 @@ const goTo = (page) => {
     >
 
       <image
-        xlink:href="@/assets/img/bg/map_bg.png"
+        xlink:href="@/assets/img/map_bg.png"
         class="map-bg__img"
         width="100%"
         height="100%"

@@ -71,6 +71,6 @@ $sides: (all, x, y, top, bottom, left, right);
 // Стили для gap
 @each $space in $spaceamounts {
   ._g-#{$space} {
-    gap: #{$space * 4}px;
+    gap: #{$space * 2}px;
   }
 }
