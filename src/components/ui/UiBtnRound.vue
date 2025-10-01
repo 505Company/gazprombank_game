@@ -10,9 +10,9 @@
 .btn {
   display: grid;
   place-items: center;
-  border: solid 4px white;
   border-radius: 50%;
-  background-color: rgba(68, 90, 191, 1);
+  border: none;
+  background: rgba(255, 255, 255, 0.5);
   color: white;
 }
 </style>
