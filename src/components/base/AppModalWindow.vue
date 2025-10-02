@@ -1,6 +1,8 @@
 <script setup>
 import UiBtnRound from '@/components/ui/UiBtnRound.vue'
 
+import CrossIcon from '@/assets/img/icon/cross.svg'
+
 const props = defineProps({
   isActive: Boolean
 })
@@ -11,7 +13,7 @@ const props = defineProps({
     <div class="modal__header _py-4">
       <div class="container">
         <ui-btn-round @click="$emit('close')">
-          <img src="/src/assets/img/icon/cross.svg" class="modal__icon">
+          <img :src="CrossIcon" class="modal__icon">
         </ui-btn-round>
       </div>
     </div>

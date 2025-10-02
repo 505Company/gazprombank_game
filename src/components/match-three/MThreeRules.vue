@@ -18,7 +18,7 @@ const words = ['ход', 'хода', 'ходов']
     <section class="rules row justify-between _fw-900 _lh-16 _pa-3">
       <div class="row justify-between _g-3 _pr-5">
         <div v-for="(rule, i) in props.colors" :key="i" class="rules__color _pa-3">
-          <img :src="`/src/assets/img/match-3/${rule.img}.webp`" alt="" class="rules__img">
+          <img :src="rule.img" alt="" class="rules__img">
           <div class="rules__img-count">
             {{ rule.need - rule.have >= 0 ? rule.need - rule.have : 0 }}
           </div>

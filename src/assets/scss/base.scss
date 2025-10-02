@@ -3,6 +3,7 @@ body {
   font-size: 16px;
   line-height: 24px;
   overflow: hidden;
+  background-color: rgba(68, 116, 231, 1);
 }
 
 h1, h2, h3, h4 {
@@ -13,6 +14,7 @@ h1, h2, h3, h4 {
 .app {
   max-height: 100vh;
   height: 100%;
+  background-color: rgba(68, 116, 231, 1);
 }
 
 .container {
