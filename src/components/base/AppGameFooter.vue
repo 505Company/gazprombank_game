@@ -1,5 +1,7 @@
 <script setup>
 import UiBtnRound from '@/components/ui/UiBtnRound.vue'
+
+import IconLamp from '@/assets/img/icon/lamp_icon.svg'
 </script>
 
 <template>
@@ -7,7 +9,7 @@ import UiBtnRound from '@/components/ui/UiBtnRound.vue'
     <div class="container">
       <div class="row justify-end">
         <ui-btn-round>
-          <img src="/src/assets/img/icon/lamp_icon.svg" alt="" class="icon">
+          <img :src="IconLamp" alt="" class="icon">
         </ui-btn-round>
       </div>
     </div>

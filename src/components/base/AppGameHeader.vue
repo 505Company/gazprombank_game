@@ -1,5 +1,7 @@
 <script setup>
 import UiBtnRound from '@/components/ui/UiBtnRound.vue'
+
+import PouseIcon from '@/assets/img/icon/pause_icon.svg'
 </script>
 
 <template>
@@ -8,7 +10,7 @@ import UiBtnRound from '@/components/ui/UiBtnRound.vue'
       <div class="row justify-between">
         <div>Q</div>
         <ui-btn-round>
-          <img src="/src/assets/img/icon/pause_icon.svg" alt="" class="icon">
+          <img :src="PouseIcon" alt="" class="icon">
         </ui-btn-round>
       </div>
     </div>

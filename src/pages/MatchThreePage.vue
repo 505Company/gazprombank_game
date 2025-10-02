@@ -5,15 +5,20 @@ import MatchThree from '@/games/match-three'
 import UiCard from '@/components/ui/UiCard.vue'
 import MThreeRules from '@/components/match-three/MThreeRules.vue'
 
+import BoltImg from '@/assets/img/match-3/bolt.webp'
+import HummerImg from '@/assets/img/match-3/hummer.webp'
+import LentImg from '@/assets/img/match-3/lent.webp'
+import ScissorsImg from '@/assets/img/match-3/scissors.webp'
+
 const rows = 5
 const cols = 5
 const colors = 4
 
 const colorsValue = {
-  1: 'bolt',
-  2: 'hummer',
-  3: 'lent',
-  4: 'scissors'
+  1: BoltImg,
+  2: HummerImg,
+  3: LentImg,
+  4: ScissorsImg
 }
 
 const rulesColors = [
@@ -105,10 +110,9 @@ const onDragEnd = (x, y, event, value) => {
               >
                 <img
                   v-if="!!colorsValue[value]"
-                  :src="`/src/assets/img/match-3/${colorsValue[value]}.webp`"
+                  :src="colorsValue[value]"
                   class="tile__img w-100 h-100"
                 >
-                <!-- {{ value }} -->
               </div>
             </div>
           </div>

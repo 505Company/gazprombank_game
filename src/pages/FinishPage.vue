@@ -8,6 +8,9 @@ import UiBtn from '@/components/ui/UiBtn.vue'
 import AppModalWindow from '@/components/base/AppModalWindow.vue'
 import FirstBlood from '@/components/modals/achives/FirstBlood.vue'
 
+import CoinSnowIcon from '@/assets/img/icon/coin_snow.webp'
+import ImagePrize from '@/assets/img/prizes/first_blood.webp'
+
 const router = useRouter()
 
 const isShowModal = ref(false)
@@ -23,7 +26,7 @@ const result = {
     subtitle: 'Пройди первую мини-игру',
     txt: 'Забирай промокод на повышенный кэшбек на месяц при оплате картой!',
     code: 'OSDAHFH32PIUHSDFJH3JDKSHL',
-    img: 'first_blood.webp',
+    img: ImagePrize,
   }
 }
 
@@ -41,7 +44,7 @@ const closeModalPrize = () => isShowModal.value = false
       <h1 class="_fs-32 _mb-10">{{ titleText }}</h1>
 
       <ui-card class="finish__card col align-center justify-center">
-        <img src="/src/assets/img/icon/coin_snow.webp" alt="" class="finish__icon _mb-1">
+        <img :src="CoinSnowIcon" alt="" class="finish__icon _mb-1">
 
         <p class="finish__count _fs-36 _lh-36">{{ result.sn }}</p>
       </ui-card>
