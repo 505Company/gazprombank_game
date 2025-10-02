@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import { useResultStore } from '@/stores/resultGame'
 
 import UiCard from '@/components/ui/UiCard.vue'
 import UiBtn from '@/components/ui/UiBtn.vue'
@@ -9,29 +10,16 @@ import AppModalWindow from '@/components/base/AppModalWindow.vue'
 import FirstBlood from '@/components/modals/achives/FirstBlood.vue'
 
 import CoinSnowIcon from '@/assets/img/icon/coin_snow.webp'
-import ImagePrize from '@/assets/img/prizes/first_blood.webp'
 
 const router = useRouter()
 
 const isShowModal = ref(false)
 
-const result = {
-  id: 1,
-  slug: 'match3',
-  sn: 120,
-  isWin: true,
-  prize: {
-    id: 11,
-    title: 'Новая награда',
-    subtitle: 'Пройди первую мини-игру',
-    txt: 'Забирай промокод на повышенный кэшбек на месяц при оплате картой!',
-    code: 'OSDAHFH32PIUHSDFJH3JDKSHL',
-    img: ImagePrize,
-  }
-}
+const res = useResultStore()
+
 
 const titleText = computed(() => {
-  return result.isWin ? 'Победа!' : 'Еще чуть-чуть!'
+  return res.result.isWin ? 'Победа!' : 'Еще чуть-чуть!'
 })
 
 const showModalPrize = () => isShowModal.value = true
@@ -46,12 +34,12 @@ const closeModalPrize = () => isShowModal.value = false
       <ui-card class="finish__card col align-center justify-center">
         <img :src="CoinSnowIcon" alt="" class="finish__icon _mb-1">
 
-        <p class="finish__count _fs-36 _lh-36">{{ result.sn }}</p>
+        <p class="finish__count _fs-36 _lh-36">{{ res.result.sn }}</p>
       </ui-card>
     </div>
     
     <div class="finish__footer col align-center">
-      <ui-btn v-if="result.isWin" class="_mb-3" @click="showModalPrize">ЗАБРАТЬ</ui-btn>
+      <ui-btn v-if="res.result.isWin" class="_mb-3" @click="showModalPrize">ЗАБРАТЬ</ui-btn>
       <ui-btn v-else class="_mb-3" @click="router.back()">Повторить</ui-btn>
 
       <router-link :to="{name: 'Map'}" class="finish__link">
@@ -60,7 +48,7 @@ const closeModalPrize = () => isShowModal.value = false
     </div>
 
     <app-modal-window :is-active="isShowModal" @close="closeModalPrize">
-      <first-blood :prize="result.prize" />
+      <first-blood :prize="res.result.prize" />
     </app-modal-window>
   </section>
 </template>

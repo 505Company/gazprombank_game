@@ -15,8 +15,6 @@ const storyName = computed(() => {
       return SoryOneTwo
   }
 })
-
-console.log(route.params)
 </script>
 
 <template>
@@ -24,3 +22,9 @@ console.log(route.params)
     <component :is="storyName" />
   </section>
 </template>
+
+<style lang="scss" scoped>
+.sory {
+  background-color: rgba(68, 116, 231, 1);
+}
+</style>

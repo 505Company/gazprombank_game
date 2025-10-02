@@ -35,9 +35,11 @@ import CopyIcon from '@/assets/img/icon/copy_icon.svg'
           </div>
         </div>
 
-        <ui-btn class="_mt-15">
-          забрал
-        </ui-btn>
+        <router-link :to="{name: 'Map'}">
+          <ui-btn class="_mt-15">
+            забрал
+          </ui-btn>
+        </router-link>
       </div>
     </div>
   </section>
