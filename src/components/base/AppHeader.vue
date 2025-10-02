@@ -1,10 +1,14 @@
 <script setup>
 import UiBadge from '@/components/ui/UiBadge.vue'
 
+import SnowIcon from '@/assets/img/icon/coin_snow.webp'
+import CoinIcon from '@/assets/img/icon/coin_coin.webp'
+import EnergIcon from '@/assets/img/icon/coin_energ.webp'
+
 const userPoints = [
-  { id: 1, img: 'coin_snow', data: 10, max: 0 },
-  { id: 2, img: 'coin_coin', data: 20, max: 0 },
-  { id: 3, img: 'coin_energ', data: 75, max: 0 },
+  { id: 1, img: SnowIcon, data: 10, max: 0 },
+  { id: 2, img: CoinIcon, data: 20, max: 0 },
+  { id: 3, img: EnergIcon, data: 75, max: 0 },
 ]
 </script>
 
@@ -14,7 +18,7 @@ const userPoints = [
       <div class="d-flex justify-between _g-2">
         <ui-badge v-for="point in userPoints" :key="point.id" class="w-100" :class="point.img">
           <div class="d-flex align-center _g-2">
-            <img :src="`/src/assets/img/icon/${point.img}.webp`" class="header__icon">
+            <img :src="point.img" class="header__icon">
 
             <div>
               <span>{{ point.data }}</span>

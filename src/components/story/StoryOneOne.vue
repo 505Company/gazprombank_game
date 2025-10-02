@@ -58,11 +58,13 @@ const nextStep = () => { step.value++ }
 
 <style lang="scss" scoped>
 .step-0 {
+  background-color: rgba(68, 116, 231, 1);
   background-image: url('@/assets/img/story/1.1.webp');
   background-size: cover;
 }
 
 .step-1 {
+  background-color: rgba(68, 116, 231, 1);
   background-image: url('@/assets/img/story/1.2.webp');
   background-size: cover;
 }

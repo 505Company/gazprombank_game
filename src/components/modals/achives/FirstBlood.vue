@@ -2,11 +2,12 @@
 import { copyOnClipBoard } from '@/utils'
 
 import UiBtn from '@/components/ui/UiBtn.vue'
-import UiBtnRoundVue from '@/components/ui/UiBtnRound.vue'
 
 const props = defineProps({
   prize: Object
 })
+
+import CopyIcon from '@/assets/img/icon/copy_icon.svg'
 </script>
 
 <template>
@@ -19,7 +20,7 @@ const props = defineProps({
         </div>
 
         <div class="d-flex justify-center">
-          <img :src="`/src/assets/img/prizes/${prize.img}`" class="achive__img">
+          <img :src="prize.img" class="achive__img">
         </div>
 
         <div class="col align-center justify-center">
@@ -29,14 +30,16 @@ const props = defineProps({
             <p>{{ prize.code }}</p>
 
             <ui-btn-round class="achive__copy" @click="copyOnClipBoard(prize.code)">
-              <img src="/src/assets/img/icon/copy_icon.svg" alt="">
+              <img :src="CopyIcon" alt="">
             </ui-btn-round>
           </div>
         </div>
 
-        <ui-btn class="_mt-15">
-          забрал
-        </ui-btn>
+        <router-link :to="{name: 'Map'}">
+          <ui-btn class="_mt-15">
+            забрал
+          </ui-btn>
+        </router-link>
       </div>
     </div>
   </section>

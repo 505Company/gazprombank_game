@@ -1,19 +1,31 @@
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, computed, watch, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useResultStore } from '@/stores/resultGame'
+
 import MatchThree from '@/games/match-three'
 
-import UiCard from '@/components/ui/UiCard.vue'
 import MThreeRules from '@/components/match-three/MThreeRules.vue'
+
+import BoltImg from '@/assets/img/match-3/bolt.webp'
+import HummerImg from '@/assets/img/match-3/hummer.webp'
+import LentImg from '@/assets/img/match-3/lent.webp'
+import ScissorsImg from '@/assets/img/match-3/scissors.webp'
+
+import ImagePrize from '@/assets/img/prizes/first_blood.webp'
+
+const router = useRouter()
+const store = useResultStore()
 
 const rows = 5
 const cols = 5
 const colors = 4
 
 const colorsValue = {
-  1: 'bolt',
-  2: 'hummer',
-  3: 'lent',
-  4: 'scissors'
+  1: BoltImg,
+  2: HummerImg,
+  3: LentImg,
+  4: ScissorsImg
 }
 
 const rulesColors = [
@@ -61,22 +73,61 @@ const onDragEnd = (x, y, event, value) => {
   }
 
   dragStart.value = null
-  
-  if (game.isWin()) {
-    console.log('WIN')
-  } else if (game.isLose()) {
-    console.log('LOSE')
-  }
 }
+
+const res = ref({
+  id: 1,
+  slug: 'match3',
+  sn: 0,
+  isWin: false,
+  prize: {
+    id: 11,
+    title: 'Новая награда',
+    subtitle: 'Пройди первую мини-игру',
+    txt: 'Забирай промокод на повышенный кэшбек на месяц при оплате картой!',
+    code: 'OSDAHFH32PIUHSDFJH3JDKSHL',
+    img: ImagePrize,
+  }
+})
+
+const saveResult = (result) => {
+  store.setResultData(result)
+}
+
+const isWin = computed(() => {
+  return game.isWin()
+})
+
+const isLose = computed(() => {
+  return game.isLose()
+})
+
+watch(isWin, async () => {
+  if (isLose) {
+    res.value.sn = 120
+    res.value.isWin = true
+
+    saveResult(res.value)
+    await new Promise(resolve => setTimeout(resolve, 500))
+    router.push({ name: 'Finish' })
+  }
+})
+
+watch(isLose, async () => {
+  if (isLose) {
+    res.value.sn = 10
+    res.value.isWin = false
+
+    saveResult(res.value)
+    await new Promise(resolve => setTimeout(resolve, 500))
+    router.push({ name: 'Finish' })
+  }
+})
 </script>
 
 <template>
   <section class="match-three h-100 _py-4">
     <div class="container">
-
-      <!-- <ui-card class="_mx-8 _my-4">
-        <p>Собери достаточное количество материалов, чтобы починить холодильник</p>
-      </ui-card> -->
       <section class="match-three__main">
         <m-three-rules
           :key="game.stepsLeft"
@@ -85,8 +136,6 @@ const onDragEnd = (x, y, event, value) => {
         />
 
         <section class="field col w-100 _g-2 _pa-2">
-          <!-- <div class="_my-4">SCORE: {{ game.score }}</div> -->
-
           <div
             v-for="(row, y) in game.field.matrix"
             :key="y"
@@ -105,10 +154,9 @@ const onDragEnd = (x, y, event, value) => {
               >
                 <img
                   v-if="!!colorsValue[value]"
-                  :src="`/src/assets/img/match-3/${colorsValue[value]}.webp`"
+                  :src="colorsValue[value]"
                   class="tile__img w-100 h-100"
                 >
-                <!-- {{ value }} -->
               </div>
             </div>
           </div>
