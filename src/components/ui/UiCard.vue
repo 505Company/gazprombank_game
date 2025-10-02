@@ -1,9 +1,14 @@
 <script setup>
-const isDark = true 
+const props = defineProps({
+  isDark: {
+    type: Boolean,
+    default: false
+  }
+})
 </script>
 
 <template>
-  <section :class="{'card_dark': isDark}" class="card _px-4 _py-6">
+  <section :class="{'card_dark': props.isDark}" class="card _px-4 _py-6">
     <div class="card__content">
       <slot />
     </div>
@@ -13,6 +18,7 @@ const isDark = true
 <style lang="scss" scoped>
 .card {
   border-radius: 16px;
+  box-shadow: 0px 2px 10px 3px rgba(0, 73, 150, 0.4),inset 3px 1.5px 5px 0px rgba(171, 197, 255, 1),inset -6px -4px 4px 0px rgba(192, 214, 252, 1),inset 6px 5px 4px 0px rgba(210, 224, 255, 0.8);
   background-color: white;
 
   &_dark {

@@ -61,6 +61,12 @@ const onDragEnd = (x, y, event, value) => {
   }
 
   dragStart.value = null
+  
+  if (game.isWin()) {
+    console.log('WIN')
+  } else if (game.isLose()) {
+    console.log('LOSE')
+  }
 }
 </script>
 

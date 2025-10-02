@@ -5,6 +5,11 @@ body {
   overflow: hidden;
 }
 
+h1, h2, h3, h4 {
+  font-family: 'Halvar Breit';
+  font-weight: 700;
+}
+
 .app {
   max-height: 100vh;
   height: 100%;
@@ -51,4 +56,8 @@ body {
 
 .align-center {
   align-items: center;
+}
+
+.text_center {
+  text-align: center;
 }
