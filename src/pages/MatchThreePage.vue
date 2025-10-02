@@ -3,7 +3,7 @@ import { reactive, ref } from 'vue'
 import MatchThree from '@/games/match-three'
 
 import UiCard from '@/components/ui/UiCard.vue'
-import UiBtnRound from '@/components/ui/UiBtnRound.vue'
+import MThreeRules from '@/components/match-three/MThreeRules.vue'
 
 const rows = 5
 const cols = 5
@@ -16,16 +16,22 @@ const colorsValue = {
   4: 'scissors'
 }
 
-const game = reactive(new MatchThree(rows, cols, colors))
+const rulesColors = [
+  { id: 1, img: colorsValue[1], need: 9 },
+  { id: 3, img: colorsValue[3], need: 12 },
+]
+const countTry = 10
+
+const game = reactive(new MatchThree(rows, cols, colors, countTry, rulesColors))
 const dragStart = ref(null)
 
-function onDragStart(x, y, event) {
+const onDragStart = (x, y, event) => {
   dragStart.value = { x, y, clientX: event.clientX, clientY: event.clientY }
   const tile = event.target.closest('.tile')
   tile.classList.add('js-tile_active')
 }
 
-function onDragEnd(x, y, event) {
+const onDragEnd = (x, y, event, value) => {
   if (!dragStart.value) return
 
   const activeList = document.querySelectorAll('.js-tile_active')
@@ -55,6 +61,12 @@ function onDragEnd(x, y, event) {
   }
 
   dragStart.value = null
+  
+  if (game.isWin()) {
+    console.log('WIN')
+  } else if (game.isLose()) {
+    console.log('LOSE')
+  }
 }
 </script>
 
@@ -62,50 +74,46 @@ function onDragEnd(x, y, event) {
   <section class="match-three h-100 _py-4">
     <div class="container">
 
-      <ui-card class="_mx-8 _my-4">
+      <!-- <ui-card class="_mx-8 _my-4">
         <p>Собери достаточное количество материалов, чтобы починить холодильник</p>
-      </ui-card>
+      </ui-card> -->
+      <section class="match-three__main">
+        <m-three-rules
+          :key="game.stepsLeft"
+          :colors="game.rules"
+          :count="game.stepsLeft"
+        />
 
-      <section class="field col w-100 _g-2 _pa-2">
-        <!-- <div class="_my-4">SCORE: {{ game.score }}</div> -->
+        <section class="field col w-100 _g-2 _pa-2">
+          <!-- <div class="_my-4">SCORE: {{ game.score }}</div> -->
 
-        <div
-          v-for="(row, y) in game.field.matrix"
-          :key="y"
-          class="row justify-between _g-2"
-        >
           <div
-            v-for="(value, x) in row"
-            :key="x"
-            class="tile _pa-1 w-100"
+            v-for="(row, y) in game.field.matrix"
+            :key="y"
+            class="row justify-between _g-2"
           >
             <div
-              class="tile__dot d-flex w-100 h-100"
-              :style="`background-image: ${colorsValue[value]}`"
-              @touchstart="onDragStart(x, y, $event.touches[0])"
-              @touchend="onDragEnd(x, y, $event.changedTouches[0])"
+              v-for="(value, x) in row"
+              :key="x"
+              class="tile _pa-1 w-100"
             >
-              <img
-                v-if="!!colorsValue[value]"
-                :src="`/src/assets/img/match-3/${colorsValue[value]}.webp`"
-                class="tile__img w-100 h-100"
+              <div
+                class="tile__dot d-flex w-100 h-100"
+                :style="`background-image: ${colorsValue[value]}`"
+                @touchstart="onDragStart(x, y, $event.touches[0])"
+                @touchend="onDragEnd(x, y, $event.changedTouches[0], value)"
               >
-              <!-- {{ value }} -->
+                <img
+                  v-if="!!colorsValue[value]"
+                  :src="`/src/assets/img/match-3/${colorsValue[value]}.webp`"
+                  class="tile__img w-100 h-100"
+                >
+                <!-- {{ value }} -->
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </section>
-
-      <div class="row justify-between _my-4">
-        <ui-btn-round>
-          <img src="/src/assets/img/icon/reboot_icon.svg" alt="" class="icon">
-        </ui-btn-round>
-
-        <ui-btn-round>
-          <img src="/src/assets/img/icon/lamp_icon.svg" alt="" class="icon">
-        </ui-btn-round>
-      </div>
-      
     </div>
   </section>
 </template>
@@ -113,6 +121,7 @@ function onDragEnd(x, y, event) {
 <style lang="scss" scoped>
 .match-three {
   display: grid;
+  place-items: center;
   background-image: url('@/assets/img/match-3/match_bg.webp');
   background-size: cover;
 }
@@ -136,12 +145,6 @@ function onDragEnd(x, y, event) {
     border-radius: 50%;
     transition: all .3s ease;
   }
-}
-
-.icon {
-  width: 32px;
-  height: 32px;
-  transition: all .3s ease;
 }
 
 .js-tile_active {

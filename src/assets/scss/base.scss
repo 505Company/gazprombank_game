@@ -1,8 +1,13 @@
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Gazprombank Sans', sans-serif;
   font-size: 16px;
   line-height: 24px;
   overflow: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Halvar Breit';
+  font-weight: 700;
 }
 
 .app {
@@ -45,6 +50,14 @@ body {
   justify-content: center;
 }
 
+.justify-end {
+  justify-content: flex-end;
+}
+
 .align-center {
   align-items: center;
+}
+
+.text_center {
+  text-align: center;
 }

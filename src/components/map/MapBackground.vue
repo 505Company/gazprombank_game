@@ -49,7 +49,7 @@ const goTo = (page) => {
         </circle>
       </g>
 
-      <g class="hover_group" opacity="0.5">
+      <g class="hover_group" opacity="0">
         <circle
           cx="60%"
           cy="22%"
