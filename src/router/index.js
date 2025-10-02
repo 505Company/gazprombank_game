@@ -13,7 +13,7 @@ const routes = [
     path: '/home',
     name: 'Home',
     meta: {
-      layout: 'default'
+      layout: 'empty'
     },
     component: () => import('@/pages/HomePage.vue')
   },
