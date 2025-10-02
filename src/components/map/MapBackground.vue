@@ -77,6 +77,60 @@ const goTo = (page) => {
           repeatCount="indefinite"
         />
       </g>
+
+      <g class="bubble__friend">
+        <image
+          xlink:href="@/assets/img/bubble.webp"
+          width="12"
+          height="12"
+          x="15%"
+          y="20%"
+        />
+
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0 0; 0 -0.5; 0 0; 0 0.5; 0 0"
+          dur="3s"
+          repeatCount="indefinite"
+        />
+      </g>
+
+      <g class="bubble__ashan">
+        <image
+          xlink:href="@/assets/img/bubble.webp"
+          width="12"
+          height="12"
+          x="80%"
+          y="33%"
+        />
+
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0 0; 0 -0.5; 0 0; 0 0.5; 0 0"
+          dur="3s"
+          repeatCount="indefinite"
+        />
+      </g>
+
+      <g class="bubble__bank">
+        <image
+          xlink:href="@/assets/img/bubble.webp"
+          width="12"
+          height="12"
+          x="78%"
+          y="57%"
+        />
+
+        <animateTransform
+          attributeName="transform"
+          type="translate"
+          values="0 0; 0 -0.5; 0 0; 0 0.5; 0 0"
+          dur="3s"
+          repeatCount="indefinite"
+        />
+      </g>
     </svg>
   </figure>
 </template>
