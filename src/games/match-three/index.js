@@ -1,9 +1,14 @@
 import { Field } from './field'
 
 export default class MatchThree {
-  constructor(rows, cols, colors) {
+  constructor(rows, cols, colors, steps = 10, rules = []) {
     this.field = new Field(rows, cols, colors)
     this.score = 0
+    this.stepsLeft = steps
+    this.rules = rules.map(rule => ({
+      ...rule,
+      have: 0
+    }))
   }
 
   swap(x1, y1, x2, y2) {
@@ -13,6 +18,8 @@ export default class MatchThree {
   }
 
   async swapWithCheck(x1, y1, x2, y2) {
+    if (this.stepsLeft <= 0) return false
+
     this.swap(x1, y1, x2, y2)
 
     const matches = this.findMatches()
@@ -22,6 +29,7 @@ export default class MatchThree {
       this.swap(x1, y1, x2, y2)
       return false
     } else {
+      this.stepsLeft--
       await this.resolveMatches()
       return true
     }
@@ -34,6 +42,12 @@ export default class MatchThree {
       this.score += matches.length
 
       if (matches.length > 0) {
+        for (const { x, y } of matches) {
+          const value = this.field.matrix[y][x]
+          const rule = this.rules.find(r => r.id === value)
+          if (rule) rule.have++
+        }
+
         this.removeMatches(matches)
         await new Promise(resolve => setTimeout(resolve, 500))
         this.collapse()
@@ -46,6 +60,7 @@ export default class MatchThree {
 
     for (let y = 0; y < this.field.rowCount; y++) {
       let streak = 1
+
       for (let x = 1; x < this.field.colCount; x++) {
         if (this.field.matrix[y][x] === this.field.matrix[y][x - 1]) {
           streak++
@@ -58,6 +73,7 @@ export default class MatchThree {
           streak = 1
         }
       }
+
       if (streak >= 3) {
         for (let k = 0; k < streak; k++) {
           matches.push({ x: this.field.colCount - 1 - k, y })
@@ -67,6 +83,7 @@ export default class MatchThree {
 
     for (let x = 0; x < this.field.colCount; x++) {
       let streak = 1
+
       for (let y = 1; y < this.field.rowCount; y++) {
         if (this.field.matrix[y][x] === this.field.matrix[y - 1][x]) {
           streak++
@@ -79,6 +96,7 @@ export default class MatchThree {
           streak = 1
         }
       }
+
       if (streak >= 3) {
         for (let k = 0; k < streak; k++) {
           matches.push({ x, y: this.field.rowCount - 1 - k })
@@ -115,5 +133,13 @@ export default class MatchThree {
         this.field.matrix[y][x] = column[y]
       }
     }
+  }
+
+  isWin() {
+    return this.rules.every(rule => rule.have >= rule.need)
+  }
+
+  isLose() {
+    return this.stepsLeft <= 0 && !this.isWin()
   }
 }
