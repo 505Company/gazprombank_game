@@ -1,6 +1,7 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import MapBackground from '@/components/map/MapBackground.vue'
+import StoryZero from '@/components/story/StoryZero.vue'
 
 const router = useRouter()
 
@@ -14,9 +15,7 @@ const goTo = (page) => {
     <map-background />
 
     <div class="container">
-      <!-- <button class="btn _px-2 _py-1 _ml-auto" @click="goTo('Home')">
-        Go to home
-      </button> -->
+      <story-zero />
     </div>
   </section>
 </template>
